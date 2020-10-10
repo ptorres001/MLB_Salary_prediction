@@ -58,7 +58,7 @@ What statistics matter when entering arbitration?
 
 Each rookie's statistics had to be compiled for their first three years. After that year they would be eligible for arbitration. Combining that data with their salary in their fourth year, the project was to see if their was a reliable predictor into the amount of money players would earn in their fourth year. 
 
-# Data Analysis & Modeling
+# Modeling & Results
 
 ## Separation by Position
 
@@ -93,7 +93,9 @@ On the negative side, sacrifice hits is the worst. This leaves a lot to the anal
 
 ## Pitchers
 
-Pitchers were next. And while the pitcher position is varied greatly from starters, relievers and closers, the sample size was too small to differentiate them. 
+Pitchers were next. And while the pitcher position is varied greatly from starters, relievers and closers, the sample size was too small to differentiate them. The same models were tried on the pitchers subset. 
+
+The final model scores were:
 
 |Model Name|Training Set R<sup>2</sup> Score|Testing Set R<sup>2</sup> Score|
 |-|-|-|
@@ -102,9 +104,30 @@ Pitchers were next. And while the pitcher position is varied greatly from starte
 |Gradient Boosting Regressor|0.980|0.201|
 |Lasso CV|0.380|0.333|
 
-# Results
+As you can see, the Gradient Boosting Model was terribly over fit again.
 
+The best and most consistent score was the Linear Regression model. It does not have the feature selection aspect the way Lasso does but it did produce the most reliable and high score for the subset of data. 
+
+**Winner**: Linear Regression with a R<sup>2</sup> score of 37%.
+
+When we take a look at the coefficients that the Linear Regression model had left. We see the importance of certain features.
+
+![Pitcher Coefficients](PNG/linreg_pitch_coef.png)
+
+Since this model does not have feature selection, there are more coefficients to analyze. On the positive side, leading by a wide margin is BFP – which stands for Batters Faced by Pitcher. This is easy to understand if you think about the game of baseball. 
+
+While strikeouts and walks are documented milestones, simply getting an out is the key. Facing more batters means that not only is the pitcher in the game longer but also is not giving up runs so that the manager has to take him out. 
+
+On the negative end, the increase inn innings pitched seems to negatively affect their salary. This will take critical thinking about the effects more innings has on a pitcher's stamina and future longevity. 
 
 # Conclusion
 
+From our data, it seems we are missing vital information on the players. One handicap we have is the relative new philosophy that is money ball. Since this is a recent phenomenon, there isn't a large pool of players to pull from.
 
+Based on the data used, for batters, recognition and hits were the biggest categories for increased salary while sacrifice hits was the biggest category for decreases. 
+
+For pitchers, batters faced vs innings pitched were the best and worst features respectively. 
+
+# Further Steps
+
+My next steps for this project would be to include the python package *pybaseball* which has a much more comprehensive statistics set. 
