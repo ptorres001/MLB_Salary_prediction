@@ -47,7 +47,7 @@ The difference in mean salary.
 
 ## Does position come into play when determining salary?
 
-![Salary by Position](PNG/PNG/sal_primpos.png)
+![Salary by Position](PNG/sal_primpos.png)
 
 ## Is it money ball or long ball?
 What statistics matter when entering arbitration?
@@ -75,13 +75,32 @@ The final model scores were:
 |Linear Regression|0.435|0.307|
 |Lasso|0.418|0.404|
 |Gradient Boosting Regressor|0.972|0.273|
-|Lasso CV|0.406|0.410|
+|***Lasso CV***|0.406|0.410|
 
 As you can see, the Gradient Boosting Model was terribly over fit. This is a common problem with boosting models as their sequential nature leads to adjusting on the training data. 
 
 The best and most consistent score was the Lasso CV model. Lasso is a great tool for feature selection as it pushed coefficients of features with less importance to zero. 
 
-**Winner**: Lasso CV with a R<sup>2</sup> score of 
+**Winner**: Lasso CV with a R<sup>2</sup> score of 41%.
+
+When we take a look at the coefficients that the Lasso CV model had left. We see the importance of certain features.
+
+![Batter Coefficients](PNG/lassocv_batter_coef.png)
+
+If we look closely at the above graph, we can see the most important positive and negative impacts on a players salary during arbitration. And being an award winner in your first three years seems to have the highest positive impact on a rookie's salary. Followed not so closely by hits and home runs. 
+
+On the negative side, sacrifice hits is the worst. This leaves a lot to the analysis. It could be that the increase in sacrifice hits means that less time is spent on base or gaining extra bases. Sacrifice hits also lead to a definitive out even if it moves a runner over or to a score. 
+
+## Pitchers
+
+Pitchers were next. And while the pitcher position is varied greatly from starters, relievers and closers, the sample size was too small to differentiate them. 
+
+|Model Name|Training Set R<sup>2</sup> Score|Testing Set R<sup>2</sup> Score|
+|-|-|-|
+|***Linear Regression***|0.412|0.368|
+|Lasso|0.262|0.251|
+|Gradient Boosting Regressor|0.980|0.201|
+|Lasso CV|0.380|0.333|
 
 # Results
 
