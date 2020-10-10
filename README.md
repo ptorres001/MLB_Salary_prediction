@@ -13,7 +13,7 @@ For this project, I aim to build a linear regression model that will be able to 
 - helper.py -- contains helper functions to assist in the cleanup of the data
 - 01_data_cleaning.ipynb -- contains the preprocessing of the data. Combining the different data frames and gathering the three year statistics and the fourth year salary.
 - 02_analysis.ipynb -- contains the exploration of the data set and the statistical tests for the features
-- 03_modeling.ipynb -- contains
+- 03_modeling.ipynb -- contains different models to find the best indicators of salary for pitchers and batters separately
 - README.md
 
 
@@ -58,10 +58,33 @@ What statistics matter when entering arbitration?
 
 Each rookie's statistics had to be compiled for their first three years. After that year they would be eligible for arbitration. Combining that data with their salary in their fourth year, the project was to see if their was a reliable predictor into the amount of money players would earn in their fourth year. 
 
-# Results
-My latest models return varying RMSE values. 
+# Data Analysis & Modeling
 
-The lowest being a score of $1.01 million. 
+## Separation by Position
+
+After the initial exploration of the data, I split up the data between pitchers and batters. I did this because the statistics of a pitcher would just add confusion to the model for a batter and vice versa. 
+
+## Batters
+
+Batters were grouped together regardless of position. Several models were run including Linear Regression, Lasso Cross Validation, and XGBoost. 
+
+The final model scores were:
+
+|Model Name|Training Set R<sup>2</sup> Score|Testing Set R<sup>2</sup> Score|
+|-|-|-|
+|Linear Regression|0.435|0.307|
+|Lasso|0.418|0.404|
+|Gradient Boosting Regressor|0.972|0.273|
+|Lasso CV|0.406|0.410|
+
+As you can see, the Gradient Boosting Model was terribly over fit. This is a common problem with boosting models as their sequential nature leads to adjusting on the training data. 
+
+The best and most consistent score was the Lasso CV model. Lasso is a great tool for feature selection as it pushed coefficients of features with less importance to zero. 
+
+**Winner**: Lasso CV with a R<sup>2</sup> score of 
+
+# Results
+
 
 # Conclusion
 
